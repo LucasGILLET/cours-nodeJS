@@ -2,6 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const url = require('url');
 const querystring = require('querystring');
+require("dotenv").config()
 
 const monModule = require('./my_modules/module1'); // Local module
 const { random } = require('./my_modules/random'); // Local module
@@ -52,8 +53,8 @@ const server = http.createServer((req, res) => {
 
 });
 
-const hostname = '127.0.0.1';
-const port = 3000;
+const hostname = process.env.HOSTNAME || '127.0.0.1';
+const port = process.env.PORT || 3000;
 
 const personnes = ['Lucas', 'Paul', 'Gautier']
 
