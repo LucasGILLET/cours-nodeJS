@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+app.set('view engine', 'pug');
+
 // app.get('/', (req, res) => {
 // 	res.send('Hello World!');
 // });
@@ -20,6 +22,15 @@ const app = express();
 
 const globalRouter = require('./routes/global.js');
 const blogRouter = require('./routes/blog.js');
+
+const logger = function(req, res, next) {
+	const { method, url } = req;
+	const date = new Date().toLocaleString();
+	console.log(`${date}: ${method} ${url}`);
+	next();
+}
+
+app.use('/', logger)
 
 app.use('/', globalRouter);
 app.use('/blog', blogRouter);
